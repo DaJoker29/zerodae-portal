@@ -1,0 +1,157 @@
+:root {
+  --black: #252525;
+  --white: #e1e1e1;
+
+  --grey-300: #cccccc;
+  --grey-700: #636363;
+
+  --purple-300: #dad2ff;
+  --purple-500: #b2a5ff;
+  --purple-700: #605ca8;
+
+  --green-500: #66ff66;
+}
+
+html {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+body {
+  font-family: "Oswald", sans-serif;
+  width: clamp(55vw, 90vw, 960px);
+  margin: 1rem auto;
+  padding: 0;
+}
+
+.acct-header {
+  padding: 2rem;
+  margin: 0;
+  background-color: var(--purple-700);
+}
+
+.acct-main {
+  padding: 2rem;
+  margin: 0;
+  background-color: var(--purple-300);
+  color: var(--purple-700);
+}
+
+.acct-status {
+  color: var(--green-500);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.acct-header > h1 {
+  margin-bottom: 0;
+  color: var(--purple-500);
+}
+
+.acct-details {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--grey-300);
+}
+
+.acct-details > li > span {
+  color: var(--purple-500);
+}
+
+.acct-details > li {
+  display: inline-block;
+  padding: 0;
+}
+
+.acct-details > li::before {
+  content: " — ";
+}
+
+.acct-details > li:first-child::before {
+  content: "";
+}
+
+.site-list > article {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--white);
+}
+
+.site-list > article > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-list > article > div > * {
+  flex: 1 1 10ch;
+}
+
+.site-list > article > h3 {
+  margin: 0 0 1rem 0;
+  color: var(--black);
+}
+
+.site-list {
+  color: var(--grey-700);
+}
+
+.site-list p {
+  margin: 0;
+}
+
+.site-list span {
+  color: var(--purple-700);
+  text-transform: uppercase;
+}
+
+.site-interaction {
+  text-align: right;
+}
+
+.site-addons ul {
+  margin: 0;
+}
+
+.site-list > article > div.add-new-site {
+  display: grid;
+  place-content: center;
+
+  color: var(--black);
+  text-align: center;
+}
+
+.site-list > article > div.add-new-site > a {
+  color: var(--black);
+}
+
+.site-list > article > div.add-new-site > a > svg {
+  font-size: 2rem;
+  display: block;
+  margin: 0 auto;
+}
