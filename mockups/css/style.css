@@ -38,9 +38,16 @@ body {
 }
 
 .acct-status {
-  color: var(--green-500);
   font-size: 1.5rem;
   font-weight: 500;
+}
+
+.active {
+  color: var(--green-500);
+}
+
+.inactive {
+  color: var(--grey-300);
 }
 
 h1,
@@ -96,36 +103,36 @@ h3 {
   content: "";
 }
 
-.site-list > article {
+.sub-list > article {
   margin: 1rem 0;
   padding: 1rem;
   background-color: var(--white);
 }
 
-.site-list > article > div {
+.sub-list > article > div {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
 }
 
-.site-list > article > div > * {
+.sub-list > article > div > * {
   flex: 1 1 10ch;
 }
 
-.site-list > article > h3 {
+.sub-list > article > h3 {
   margin: 0 0 1rem 0;
   color: var(--black);
 }
 
-.site-list {
+.sub-list {
   color: var(--grey-700);
 }
 
-.site-list p {
+.sub-list p {
   margin: 0;
 }
 
-.site-list span {
+.sub-list span {
   color: var(--purple-700);
   text-transform: uppercase;
 }
@@ -138,7 +145,7 @@ h3 {
   margin: 0;
 }
 
-.site-list > article > div.add-new-site {
+.sub-list > article > div.add-new-site {
   display: grid;
   place-content: center;
 
@@ -146,11 +153,11 @@ h3 {
   text-align: center;
 }
 
-.site-list > article > div.add-new-site > a {
+.sub-list > article > div.add-new-site > a {
   color: var(--black);
 }
 
-.site-list > article > div.add-new-site > a > svg {
+.sub-list > article > div.add-new-site > a > svg {
   font-size: 2rem;
   display: block;
   margin: 0 auto;
