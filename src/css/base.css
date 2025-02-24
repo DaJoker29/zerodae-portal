@@ -1,0 +1,93 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+  border: none;
+}
+
+html {
+  text-size-adjust: none;
+  scroll-behavior: smooth;
+  background-color: var(--black);
+  font-size: var(--font-base-size);
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-md);
+  line-height: var(--font-line-height);
+  color: var(--white);
+  max-width: var(--container-width);
+  margin: var(--gap) auto;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: var(--gap-sm);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: var(--text-xxl);
+}
+
+h2 {
+  font-size: var(--text-xl);
+}
+
+h3 {
+  font-size: var(--text-lg);
+}
+
+p,
+h4 {
+  font-size: var(--text-md);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+  shape-margin: 1rem;
+}
+
+menu,
+ol,
+ul {
+  list-style-type: none;
+  list-style-position: inside;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  text-underline-position: under;
+  text-decoration-thickness: 8;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+label,
+button,
+select,
+summary,
+[type="radio"],
+[type="checkbox"],
+[type="submit"] {
+  cursor: pointer;
+}

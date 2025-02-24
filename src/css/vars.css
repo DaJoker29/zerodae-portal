@@ -1,0 +1,40 @@
+:root {
+  /* COLORS */
+  --black: #252525;
+  --white: #e1e1e1;
+
+  --grey-300: #cccccc;
+  --grey-700: #636363;
+
+  --purple-300: #dad2ff;
+  --purple-500: #b2a5ff;
+  --purple-700: #605ca8;
+
+  --green-500: #66ff66;
+
+  /* TYPOGRAPHY */
+  --font-primary: "Oswald", system-ui, sans-serif;
+  --font-base-size: 16px;
+  --font-scale-ratio: 1.25;
+  --font-line-height: 1.5;
+
+  --text-sm: calc(1rem / var(--font-scale-ratio));
+  --text-md: calc(1rem * var(--font-scale-ratio));
+  --text-lg: calc(1rem * var(--font-scale-ratio) * var(--font-scale-ratio));
+  --text-xl: calc(
+    1rem * var(--font-scale-ratio) * var(--font-scale-ratio) *
+      var(--font-scale-ratio)
+  );
+  --text-xxl: calc(
+    1rem * var(--font-scale-ratio) * var(--font-scale-ratio) *
+      var(--font-scale-ratio) * var(--font-scale-ratio)
+  );
+
+  /* SPACING */
+  --gap-sm: 0.5rem;
+  --gap: 1rem;
+  --gap-lg: 2rem;
+  --gap-xl: 3rem;
+  --gap-xxl: 4rem;
+  --container-width: clamp(30rem, 85ch, 90vw);
+}

@@ -1,28 +1,5 @@
-:root {
-  --black: #252525;
-  --white: #e1e1e1;
-
-  --grey-300: #cccccc;
-  --grey-700: #636363;
-
-  --purple-300: #dad2ff;
-  --purple-500: #b2a5ff;
-  --purple-700: #605ca8;
-
-  --green-500: #66ff66;
-}
-
-html {
-  background-color: var(--black);
-  color: var(--white);
-}
-
-body {
-  font-family: "Oswald", sans-serif;
-  width: clamp(55vw, 90vw, 960px);
-  margin: 1rem auto;
-  padding: 0;
-}
+@import url("vars.css");
+@import url("base.css");
 
 .acct-header {
   padding: 2rem;
@@ -50,30 +27,7 @@ body {
   color: var(--grey-300);
 }
 
-h1,
-h2,
-h3,
-h4 {
-  margin: 0;
-}
-
-h1 {
-  font-size: 3rem;
-  font-weight: 700;
-}
-
-h2 {
-  font-size: 2rem;
-  font-weight: 500;
-}
-
-h3 {
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-
 .acct-header > h1 {
-  margin-bottom: 0;
   color: var(--purple-500);
 }
 
@@ -120,7 +74,6 @@ h3 {
 }
 
 .sub-list > article > h3 {
-  margin: 0 0 1rem 0;
   color: var(--black);
 }
 
@@ -155,10 +108,4 @@ h3 {
 
 .sub-list > article > div.add-new-site > a {
   color: var(--black);
-}
-
-.sub-list > article > div.add-new-site > a > svg {
-  font-size: 2rem;
-  display: block;
-  margin: 0 auto;
 }

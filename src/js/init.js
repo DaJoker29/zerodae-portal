@@ -1,6 +1,6 @@
-import users from "../json/users.js";
-import subscriptions from "../json/subscriptions.js";
-import plans from "../json/plans.js";
+import users from "../../data/users.js";
+import subscriptions from "../../data/subscriptions.js";
+import plans from "../../data/plans.js";
 
 const init = () => {
   buildHeader();
