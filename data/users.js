@@ -15,8 +15,8 @@ const users = [
     role: "client",
     referral_code: "FGHIJ67890",
     referred_by: "KLMNO12345",
-    created_at: "2021-01-01T00:00:00Z",
-    updated_at: "2021-01-01T00:00:00Z",
+    createdAt: "2021-01-01T00:00:00Z",
+    updatedAt: "2021-01-01T00:00:00Z",
   },
 ];
 

@@ -16,7 +16,7 @@
   --font-primary: "Oswald", system-ui, sans-serif;
   --font-base-size: 16px;
   --font-scale-ratio: 1.25;
-  --font-line-height: 1.5;
+  --font-line-height: 1.4;
 
   --text-sm: calc(1rem / var(--font-scale-ratio));
   --text-md: calc(1rem * var(--font-scale-ratio));

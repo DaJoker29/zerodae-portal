@@ -1,60 +1,12 @@
 @import url("vars.css");
 @import url("base.css");
-
-.acct-header {
-  padding: 2rem;
-  margin: 0;
-  background-color: var(--purple-700);
-}
+@import url("l-header.css");
 
 .acct-main {
   padding: 2rem;
   margin: 0;
   background-color: var(--purple-300);
   color: var(--purple-700);
-}
-
-.acct-status {
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-
-.active {
-  color: var(--green-500);
-}
-
-.inactive {
-  color: var(--grey-300);
-}
-
-.acct-header > h1 {
-  color: var(--purple-500);
-}
-
-.acct-details {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--grey-300);
-}
-
-.acct-details > li > span {
-  color: var(--purple-500);
-}
-
-.acct-details > li {
-  display: inline-block;
-  padding: 0;
-}
-
-.acct-details > li::before {
-  content: " — ";
-}
-
-.acct-details > li:first-child::before {
-  content: "";
 }
 
 .sub-list > article {
@@ -87,7 +39,7 @@
 
 .sub-list span {
   color: var(--purple-700);
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .site-interaction {

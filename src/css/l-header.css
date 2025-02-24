@@ -1,0 +1,49 @@
+.page-header {
+  padding: 2rem;
+  margin: 0;
+  background-color: var(--purple-700);
+}
+
+.status-tag {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.status-tag.is-active {
+  color: var(--green-500);
+}
+
+.status-tag.is-inactive {
+  color: var(--grey-300);
+}
+
+.heading__account-holder {
+  color: var(--purple-500);
+}
+
+.list__account-details {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--grey-300);
+  display: flex;
+  gap: 0 var(--gap);
+  flex-flow: wrap;
+}
+
+.list__account-details > li > span {
+  color: var(--purple-500);
+}
+
+.referral-code {
+  cursor: help;
+  border-bottom: 0.12em dashed var(--purple-500);
+}
+
+.referral-code > svg {
+  height: 1em;
+  width: 1em;
+  display: inline;
+}

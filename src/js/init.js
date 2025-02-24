@@ -1,30 +1,30 @@
 import users from "../../data/users.js";
 import subscriptions from "../../data/subscriptions.js";
-import plans from "../../data/plans.js";
 
 const init = () => {
-  buildHeader();
+  buildHeader(users[0]);
   buildSiteList();
 };
 
-function buildHeader() {
-  const user = users[0];
-  const status = document.querySelector(".acct-status");
-  const name = document.querySelector(".acct-name");
-  const id = document.querySelector(".acct-id");
-  const referral_code = document.querySelector(".referral-code");
-  const company = document.querySelector(".company");
-
-  name.textContent = `${user.first_name} ${user.last_name}`;
-  id.textContent = user.id;
-  referral_code.textContent = user.referral_code;
-  company.textContent = user.company;
-
+function buildHeader(user) {
+  const status = document.querySelector(".status-tag");
   if (user.status === "active") {
     status.textContent = "ACTIVE";
-    status.classList.remove("inactive");
-    status.classList.add("active");
+    status.classList.remove("is-inactive");
+    status.classList.add("is-active");
   }
+
+  const name = document.querySelector(".heading__account-holder");
+  name.textContent = `${user.first_name} ${user.last_name}`;
+
+  const id = document.querySelector(".account-id");
+  id.textContent = user.id;
+
+  const referralCode = document.querySelector(".referral-code-output");
+  referralCode.textContent = user.referral_code;
+
+  const company = document.querySelector(".company-name");
+  company.textContent = user.company;
 }
 
 function buildSiteList() {
@@ -36,17 +36,25 @@ function buildSiteList() {
   subscriptions.forEach((sub) => {
     const article = document.createElement("article");
     const h3 = document.createElement("h3");
-    h3.textContent = `${sub.domain.toUpperCase()} — ${plans[sub.plan].name}`;
+    h3.textContent = `${sub.domain.toUpperCase()} — ${sub.plan}`;
     article.append(h3);
 
     // Build Site Info
     const siteInfo = document.createElement("section");
     siteInfo.classList.add("site-info");
 
+    const p0 = document.createElement("p");
+    p0.textContent = `Price: `;
+    const span0 = document.createElement("span");
+    span0.textContent = `$${sub.price} / ${sub.billingCycle}ly`;
+    p0.append(span0);
+
+    siteInfo.append(p0);
+
     const p1 = document.createElement("p");
     p1.textContent = `Started: `;
     const span1 = document.createElement("span");
-    span1.textContent = new Date(sub.created_at).toLocaleDateString();
+    span1.textContent = new Date(sub.createdAt).toLocaleDateString();
     p1.append(span1);
 
     siteInfo.append(p1);
@@ -55,7 +63,7 @@ function buildSiteList() {
       const p2 = document.createElement("p");
       p2.textContent = `Auto-Renew: `;
       const span2 = document.createElement("span");
-      span2.textContent = new Date(sub.renewal_date).toLocaleDateString();
+      span2.textContent = new Date(sub.renewalDate).toLocaleDateString();
       p2.append(span2);
 
       siteInfo.append(p2);
@@ -66,7 +74,7 @@ function buildSiteList() {
     const addons = document.createElement("section");
     addons.classList.add("site-addons");
     const ul = document.createElement("ul");
-    const domains = sub.alt_domains;
+    const domains = sub.altDomains;
     const addOns = sub.addOns;
 
     if (domains.length > 0) {
