@@ -4,6 +4,7 @@
   --white: #e1e1e1;
 
   --grey-300: #cccccc;
+  --grey-500: #a6a6a6;
   --grey-700: #636363;
 
   --purple-300: #dad2ff;
@@ -11,6 +12,8 @@
   --purple-700: #605ca8;
 
   --green-500: #66ff66;
+  --green-700: #00cc00;
+  --green-900: #009900;
 
   /* TYPOGRAPHY */
   --font-primary: "Oswald", system-ui, sans-serif;

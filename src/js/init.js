@@ -30,77 +30,68 @@ function buildHeader(user) {
 }
 
 function buildSubscriptionItem(sub) {
-  const article = document.createElement("article");
-  const h3 = document.createElement("h3");
-  h3.textContent = `${sub.domain.toUpperCase()} — ${sub.plan}`;
-  article.append(h3);
+  const template = document.querySelector("#template-subscription");
+  const clone = template.content.cloneNode(true);
 
-  // Build Site Info
-  const siteInfo = document.createElement("section");
-  siteInfo.classList.add("site-info");
+  clone.querySelector(
+    "[data-domain]"
+  ).textContent = `${sub.domain.toUpperCase()}`;
+  clone.querySelector(
+    "[data-plan]"
+  ).textContent = `${sub.plan.name} — $${sub.plan.monthlyPrice}/month`;
 
-  const p0 = document.createElement("p");
-  p0.textContent = `Price: `;
-  const span0 = document.createElement("span");
-  span0.textContent = `$${sub.price} / ${sub.billingCycle}ly`;
-  p0.append(span0);
+  if (sub.status === "active") {
+    clone.querySelector("[data-status]").classList.add("is-active");
 
-  siteInfo.append(p0);
+    if (sub.autoRenew === true) {
+      clone.querySelector("[data-auto-renew]").classList.add("has-auto-renew");
+      clone.querySelector("[data-renewal]").textContent = new Date(
+        sub.renewalDate
+      ).toLocaleDateString();
+    }
 
-  const p1 = document.createElement("p");
-  p1.textContent = `Started: `;
-  const span1 = document.createElement("span");
-  span1.textContent = new Date(sub.createdAt).toLocaleDateString();
-  p1.append(span1);
+    const total =
+      sub.plan.monthlyPrice +
+      sub.altDomains.reduce((acc, alt) => acc + alt.monthlyPrice, 0) +
+      sub.addOns.reduce((acc, addon) => acc + addon.monthlyPrice, 0);
 
-  siteInfo.append(p1);
-
-  if (sub.autoRenew === true) {
-    const p2 = document.createElement("p");
-    p2.textContent = `Auto-Renew: `;
-    const span2 = document.createElement("span");
-    span2.textContent = new Date(sub.renewalDate).toLocaleDateString();
-    p2.append(span2);
-
-    siteInfo.append(p2);
+    clone.querySelector("[data-total]").textContent = `$${total}`;
+  } else {
+    clone.querySelector("[data-status]").classList.add("is-inactive");
   }
 
-  // Build Site Addons
+  clone.querySelector("[data-created]").textContent = new Date(
+    sub.createdAt
+  ).toLocaleDateString();
 
-  const addons = document.createElement("section");
-  addons.classList.add("site-addons");
-  const ul = document.createElement("ul");
-  const domains = sub.altDomains;
-  const addOns = sub.addOns;
-
-  if (domains.length > 0) {
-    const li = document.createElement("li");
-    li.textContent = `Additional Domains: ${domains.join(", ")}`;
-    ul.append(li);
+  if (sub.altDomains.length > 0) {
+    const ul = clone.querySelector("[data-alt-domains]");
+    sub.altDomains.forEach((alt) => {
+      const li = document.createElement("li");
+      li.textContent = `${alt.domain} (${
+        alt.monthlyPrice === 0 ? "Free" : "$" + alt.monthlyPrice
+      })`;
+      ul.append(li);
+    });
   }
 
-  if (addOns.length > 0) {
-    const li = document.createElement("li");
-    li.textContent = `Add-ons: ${addOns.join(", ")}`;
-    ul.append(li);
+  if (sub.addOns.length > 0) {
+    const ul = clone.querySelector("[data-addons]");
+    sub.addOns.forEach((addon) => {
+      const li = document.createElement("li");
+      li.textContent = `${addon.name} (${
+        addon.monthlyPrice === 0 ? "Free" : "$" + addon.monthlyPrice
+      })`;
+      ul.append(li);
+    });
   }
 
-  addons.append(ul);
-
-  // Populate DOM
-  const div = document.createElement("div");
-  div.append(siteInfo);
-  div.append(addons);
-  article.appendChild(div);
-
-  sublist.prepend(article);
+  sublist.append(clone);
 }
 
 function buildSiteList() {
   const subCounter = document.querySelector("[data-subscription-count]");
-
   subCounter.textContent = subscriptions.length;
-
   subscriptions.forEach((sub) => buildSubscriptionItem(sub));
 }
 

@@ -1,29 +1,27 @@
-<article>
-  <h3><%= subscription.domain %></h3>
-  — <%= subscription.plan %>
-  <p><%= subscription.status %></p>
-  <div class="subscription-details">
-    <section>
-      <p>Price <span><%= subscription.price %></span></p>
-      <p>Started <span><%= subscription.createdAt %></span></p>
-      <% if (subscription.autoRenew) { %>
-      <p>Auto-Renew <span><%= subscription.renewalDate %></span></p>
-      <% } %>
-    </section>
-    <section>
-      <p><strong>Alternate Domains</strong></p>
-      <ul>
-        <% subscription.alternateDomains.forEach(function(domain) { %>
-        <li><%= domain.domain %> — <% domain.price %></li>
-        <% }); %>
-      </ul>
-    </section>
-    <section>
+<template id="template-subscription">
+  <article class="subscription" data-status data-auto-renew>
+    <hgroup>
+      <h3 data-domain></h3>
+      <small data-plan></small>
+    </hgroup>
+    <p data-status></p>
+    <div class="subscription-details">
+      <section>
+        <p>Started <span data-created></span></p>
+        <p class="payment-due">Payment Due <span data-renewal></span></p>
+        <p class="total-due">Total Due <span data-total></span></p>
+        <p class="auto-renew" title="Auto Renewal Activated">
+          <%- include('../icons/money') %>
+        </p>
+      </section>
+      <section>
+        <p><strong>Alternate Domains</strong></p>
+        <ul data-alt-domains></ul>
+      </section>
+      <section>
         <p><strong>Add-Ons</strong></p>
-        <ul>
-          <% subscription.addOns.forEach(function(addOn) { %>
-          <li><%= addOn.name %> — <%= addOn.price %></li>
-          <% }); %>
-    </section>
-  </div>
-</article>
+        <ul data-addons></ul>
+      </section>
+    </div>
+  </article>
+</template>

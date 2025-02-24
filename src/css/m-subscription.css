@@ -1,0 +1,103 @@
+/* Dashboard Layout */
+.dashboard {
+  padding: 2rem;
+  margin: 0;
+  background-color: var(--purple-300);
+  color: var(--purple-700);
+}
+
+/* Subscriptions List */
+.list__all-subscriptions {
+  color: var(--grey-700);
+}
+
+.list__all-subscriptions > article {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--white);
+}
+
+/* Individual Subscriptions */
+.subscription hgroup {
+  border-left: 0.5rem solid;
+  padding-left: var(--gap);
+  margin-bottom: var(--gap);
+  color: var(--black);
+}
+
+.subscription.is-active {
+  & hgroup {
+    border-color: var(--green-900);
+  }
+
+  & .payment-due,
+  & .total-due {
+    display: block;
+  }
+}
+
+.subscription.is-inactive {
+  & hgroup {
+    border-color: var(--grey-500);
+  }
+}
+
+.subscription-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.subscription-details > section {
+  flex: 1 1 10ch;
+}
+
+.subscription-details span {
+  color: var(--purple-700);
+  text-transform: capitalize;
+}
+
+.option__add-new-subscription {
+  display: grid;
+  place-content: center;
+  color: var(--black);
+  text-align: center;
+}
+
+.auto-renew {
+  display: none;
+  padding-block: var(--gap-sm);
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: help;
+}
+
+.auto-renew::after {
+  content: "Auto-renew enabled";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  background-color: var(--grey-700);
+  padding: var(--gap-sm);
+  color: var(--white);
+  width: clamp(10ch, 20ch, 30ch);
+  text-align: center;
+}
+
+.auto-renew:hover::after {
+  display: block;
+}
+
+.has-auto-renew .auto-renew {
+  display: inline-block;
+}
+.auto-renew svg {
+  height: 2rem;
+  width: 2rem;
+}
+
+.payment-due,
+.total-due {
+  display: none;
+}
