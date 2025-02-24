@@ -5,8 +5,20 @@ const subscriptions = [
     status: "active",
     plan: "Essential Hosting",
     domain: "example.org",
-    altDomains: ["example.com", "example.net"],
-    addOns: ["email", "ssl"],
+    altDomains: [
+      {
+        domain: "example.com",
+        price: 0,
+      },
+      {
+        domain: "example.net",
+        price: 12,
+      },
+    ],
+    addOns: [
+      { name: "Google Workspaces", price: 60 },
+      { name: "SSL Protection", price: 0 },
+    ],
     createdAt: "2021-01-01T00:00:00Z",
     updatedAt: "2021-01-01T00:00:00Z",
     renewalDate: "2022-01-01T00:00:00Z",
