@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A simple portal for managing website subscriptions.",
   "scripts": {
+    "start": "dotenvx run -- vite serve client",
+    "dev": "dotenvx run -- vite serve client",
+    "build": "dotenvx run -- vite build client",
+    "preview": "dotenvx run -- vite preview client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "dotenvx run -- node ./scripts/buildDev.mjs",
     "watch": "dotenvx run -- node ./scripts/watchDev.mjs"
@@ -19,8 +23,12 @@
   "homepage": "https://github.com/DaJoker29/zerodae-portal#readme",
   "dependencies": {
     "@dotenvx/dotenvx": "^1.37.0",
+    "@vitejs/plugin-vue": "^5.2.1",
     "chokidar": "^4.0.3",
     "ejs": "^3.1.10",
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "vite": "^6.2.0",
+    "vue-router": "^4.5.0",
+    "vuex": "^4.0.2"
   }
 }

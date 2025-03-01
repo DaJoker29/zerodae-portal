@@ -18,9 +18,6 @@ body {
   font-size: var(--text-md);
   line-height: var(--font-line-height);
   color: var(--white);
-  max-width: var(--container-width);
-  margin: var(--gap) auto;
-  padding: 0;
 }
 
 h1,
@@ -73,9 +70,14 @@ ul {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: var(--purple-500);
   text-underline-position: under;
   text-decoration-thickness: 8;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--purple-300);
 }
 
 :focus:not(:focus-visible) {

@@ -15,6 +15,11 @@
   --green-700: #00cc00;
   --green-900: #009900;
 
+  --red-300: #ffcccc;
+  --red-500: #ff6666;
+  --red-700: #ff0000;
+  --red-900: #cc0000;
+
   /* TYPOGRAPHY */
   --font-primary: "Oswald", system-ui, sans-serif;
   --font-base-size: 16px;
@@ -34,6 +39,7 @@
   );
 
   /* SPACING */
+  --gap-xs: 0.25rem;
   --gap-sm: 0.5rem;
   --gap: 1rem;
   --gap-lg: 2rem;
