@@ -1,9 +1,11 @@
 import chokidar from "chokidar";
 import { execSync } from "child_process";
 
-const targets = ["src", "static", "data", "views", "config"];
+const targets = ["client"];
 
-const watcher = chokidar.watch(targets);
+const watcher = chokidar.watch(targets, {
+  ignored: /dist/,
+});
 
 const log = console.log.bind(console);
 

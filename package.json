@@ -4,8 +4,8 @@
   "description": "A simple portal for managing website subscriptions.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dev": "dotenvx run -- node ./utils/buildDev.mjs",
-    "watch": "dotenvx run -- node ./utils/watchDev.mjs"
+    "build:dev": "dotenvx run -- node ./scripts/buildDev.mjs",
+    "watch": "dotenvx run -- node ./scripts/watchDev.mjs"
   },
   "repository": {
     "type": "git",

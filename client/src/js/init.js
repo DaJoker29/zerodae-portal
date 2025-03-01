@@ -92,6 +92,7 @@ function buildSubscriptionItem(sub) {
 function buildSiteList() {
   const subCounter = document.querySelector("[data-subscription-count]");
   subCounter.textContent = subscriptions.length;
+  
   subscriptions.forEach((sub) => buildSubscriptionItem(sub));
 }
 

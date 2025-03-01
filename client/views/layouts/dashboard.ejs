@@ -1,5 +1,9 @@
 <main class="dashboard">
-  <h2>Subscriptions (<span data-subscription-count>0</span>)</h2>
+  <hgroup>
+    <h2>Dashboard</h2>
+    <strong><span data-subscription-count></span> Subscriptions</strong>
+  </hgroup>
+  <p><button><%- include('../icons/plus') %> Create Subscription</button></p>
   <section class="list__all-subscriptions">
     <%- include('../templates/subscription') %>
   </section>
