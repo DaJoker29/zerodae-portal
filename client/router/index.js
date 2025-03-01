@@ -9,17 +9,11 @@ const router = createRouter({
     {
       path: "/",
       name: "Dashboard",
-      meta: {
-        title: "Dashboard",
-      },
       component: () => import("../views/DashboardView.vue"),
     },
     {
       path: "/account",
-      name: "Account",
-      meta: {
-        title: "Account Settings",
-      },
+      name: "Account Settings",
       component: () => import("../views/AccountView.vue"),
     },
   ],
@@ -27,7 +21,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
-    document.title = `${to.meta.title} — ${defaultTitle}`;
+    document.title = `${to.name} — ${defaultTitle}`;
   } else {
     document.title = defaultTitle;
   }

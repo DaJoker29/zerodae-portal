@@ -27,7 +27,8 @@ export default {
     <div class="titlebar__end">
       <span class="titlebar__greeting">{{ greeting }} </span>
       <router-link class="titlebar__logout" to="/logout"
-        ><SVGLogout /> <span class="titlebar__logout--text">LOGOUT</span>
+        ><SVGLogout class="titlebar__logout--icon" />
+        <span class="titlebar__logout--text">LOGOUT</span>
       </router-link>
     </div>
   </div>
@@ -39,8 +40,6 @@ export default {
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--purple-700);
-  color: var(--white);
   gap: var(--gap);
   padding: var(--gap-xs) var(--gap);
 }
@@ -64,35 +63,28 @@ export default {
 }
 
 .titlebar a {
-  color: var(--purple-500);
+  color: var(--purple-300);
   text-decoration: none;
-  padding: var(--gap-sm) var(--gap);
-  padding-right: 0;
   border-radius: 0.25rem;
-  transition: color 0.3s, opacity 0.3s;
-  line-height: 1;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: var(--gap);
-  opacity: 0.7;
+  gap: var(--gap-sm);
+  opacity: 0.6;
+  color: var(--red-500);
 }
 
 .titlebar a:hover {
-  color: var(--red-500);
   opacity: 1;
+  color: var(--red-500);
 }
 
 @media (max-width: 768px) {
-  .titlebar__logout {
-    font-size: 1.5rem;
+  .titlebar__logout--icon {
+    font-size: 1.5em;
   }
   .titlebar__logout--text {
     display: none;
-  }
-
-  .titlebar a {
-    opacity: 1;
-    color: var(--white);
   }
 }
 
