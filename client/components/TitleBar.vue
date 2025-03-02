@@ -41,7 +41,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   gap: var(--gap);
-  padding: var(--gap-xs) var(--gap);
+  margin: var(--gap);
+  margin-bottom: var(--gap-xs);
 }
 
 .titlebar__logo {

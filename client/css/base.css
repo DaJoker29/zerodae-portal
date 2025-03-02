@@ -93,3 +93,7 @@ summary,
 [type="submit"] {
   cursor: pointer;
 }
+
+small {
+  font-size: var(--text-sm);
+}

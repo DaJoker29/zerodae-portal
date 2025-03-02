@@ -26,7 +26,8 @@ nav {
   display: flex;
   flex-flow: row wrap;
   gap: var(--gap);
-  margin: var(--gap-lg) var(--gap);
+  margin-bottom: var(--gap-lg);
+  margin-inline: var(--gap);
   align-items: center;
 }
 
