@@ -5,6 +5,8 @@ const defaultTitle = "ZeroDae User Portal";
 
 const router = createRouter({
   history: createWebHistory(),
+  linkActiveClass: "isActiveLink",
+  linkExactActiveClass: "isExactActive",
   routes: [
     {
       path: "/",
