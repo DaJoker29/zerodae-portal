@@ -32,7 +32,7 @@ nav {
 }
 
 nav a {
-  color: var(--purple-500);
+  color: var(--purple-300);
   padding: var(--gap-xs) var(--gap);
   border-radius: var(--gap-xs);
   display: flex;

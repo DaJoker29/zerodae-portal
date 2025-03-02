@@ -7,7 +7,7 @@
 
 .subscription.is-active {
   & hgroup {
-    border-color: var(--green-900);
+    border-color: var(--bluebluegreen-900);
   }
 
   & .payment-due,

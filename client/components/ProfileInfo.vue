@@ -1,3 +1,5 @@
+<!-- TODO: #1 Add alert when text is copied. -->
+
 <script>
 import SVGCopy from "./SVGCopy.vue";
 
@@ -41,26 +43,27 @@ aside {
   display: flex;
   flex-flow: row wrap;
   gap: var(--gap-xl);
-  color: var(--grey-300);
 }
 
 aside > div {
   display: flex;
   flex-direction: column;
-  opacity: 0.5;
   cursor: pointer;
-  transition: opacity 0.2s ease;
 }
 
-aside > div:hover {
-  opacity: 1;
-}
 aside small {
+  color: var(--purple-700);
   text-transform: uppercase;
 }
 
 aside p {
   display: flex;
   align-items: center;
+  color: var(--grey-500);
+  transition: color 0.2s ease;
+}
+
+aside p:active {
+  color: var(--purple-300);
 }
 </style>

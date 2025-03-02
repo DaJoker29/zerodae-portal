@@ -64,7 +64,7 @@ export default {
 }
 
 .titlebar a {
-  color: var(--purple-300);
+  color: var(--purple-500);
   text-decoration: none;
   border-radius: 0.25rem;
   transition: all 0.2s ease;
@@ -72,12 +72,11 @@ export default {
   align-items: center;
   gap: var(--gap-sm);
   opacity: 0.6;
-  color: var(--red-500);
 }
 
 .titlebar a:hover {
   opacity: 1;
-  color: var(--red-500);
+  color: var(--purple-300);
 }
 
 @media (max-width: 768px) {

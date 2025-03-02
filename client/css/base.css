@@ -70,7 +70,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: var(--purple-700);
+  color: var(--bluegreen-500);
   text-underline-position: under;
   text-decoration-thickness: 8;
   transition: color 0.2s ease;

@@ -22,7 +22,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
+  if (to.name) {
     document.title = `${to.name} — ${defaultTitle}`;
   } else {
     document.title = defaultTitle;
