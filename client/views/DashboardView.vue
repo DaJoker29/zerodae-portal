@@ -1,4 +1,18 @@
+<script>
+import SubscriptionList from "../components/SubscriptionList.vue";
+
+export default {
+  components: {
+    SubscriptionList,
+  },
+};
+</script>
+
 <template>
-  <p>Dashboard View</p>
-  <p><a href="">Some kind of link</a></p>
+  <hgroup>
+    <h2>Subscriptions</h2>
+    <p>Active Subscriptions</p>
+  </hgroup>
+
+  <SubscriptionList />
 </template>

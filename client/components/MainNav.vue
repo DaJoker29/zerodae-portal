@@ -39,6 +39,7 @@ nav a {
   gap: var(--gap-sm);
   align-items: center;
   vertical-align: middle;
+  text-decoration: none;
 }
 
 nav a.isActiveLink {

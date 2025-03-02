@@ -15,3 +15,13 @@ export default {
     <RouterView />
   </main>
 </template>
+
+<style scoped>
+main {
+  margin: var(--gap);
+  padding: var(--gap);
+  background-color: var(--white);
+  border-radius: 1rem;
+  color: var(--purple-900);
+}
+</style>
