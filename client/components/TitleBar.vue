@@ -42,7 +42,7 @@ export default {
   align-items: center;
   gap: var(--gap);
   margin: var(--gap);
-  margin-bottom: var(--gap-xs);
+  margin-bottom: var(--gap);
 }
 
 .titlebar__logo {

@@ -46,8 +46,7 @@ aside {
 
 aside > div {
   display: flex;
-  gap: var(--gap-sm);
-  align-items: baseline;
+  flex-direction: column;
   opacity: 0.5;
   cursor: pointer;
   transition: opacity 0.2s ease;
@@ -57,7 +56,6 @@ aside > div:hover {
   opacity: 1;
 }
 aside small {
-  /* font-weight: 300; */
   text-transform: uppercase;
 }
 
