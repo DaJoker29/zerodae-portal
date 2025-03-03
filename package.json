@@ -4,7 +4,7 @@
   "description": "A simple portal for managing website subscriptions.",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev": "concurrently --names client,server \"npm run dev:client\" \"npm run dev:server\"",
     "dev:client": "dotenvx run -- vite serve client",
     "dev:server": "dotenvx run -- nodemon server.js",
     "build": "dotenvx run -- vite build client",
