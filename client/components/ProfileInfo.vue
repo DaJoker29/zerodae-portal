@@ -59,7 +59,7 @@ aside small {
 aside p {
   display: flex;
   align-items: center;
-  color: var(--grey-500);
+  color: var(--grey-300);
   transition: color 0.2s ease;
 }
 

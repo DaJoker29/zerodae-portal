@@ -20,7 +20,7 @@ export default {
 main {
   margin: var(--gap);
   padding: var(--gap);
-  background-color: var(--white);
+  background-color: var(--purple-100);
   border-radius: 1rem;
   color: var(--purple-900);
 }

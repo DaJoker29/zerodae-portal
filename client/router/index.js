@@ -18,6 +18,11 @@ const router = createRouter({
       name: "Account Settings",
       component: () => import("../views/AccountView.vue"),
     },
+    {
+      path: "/admin",
+      name: "Admin Panel",
+      component: () => import("../views/AdminView.vue"),
+    },
   ],
 });
 

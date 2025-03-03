@@ -2,12 +2,14 @@
 import SVGComputer from "./SVGComputer.vue";
 import SVGArrowList from "./SVGArrowList.vue";
 import SVGUserCircle from "./SVGUserCircle.vue";
+import SVGAdmin from "./SVGAdmin.vue";
 
 export default {
   components: {
     SVGComputer,
     SVGArrowList,
     SVGUserCircle,
+    SVGAdmin,
   },
 };
 </script>
@@ -18,6 +20,7 @@ export default {
     <RouterLink to="/account" class="nav-link"
       ><SVGUserCircle /> Account</RouterLink
     >
+    <RouterLink to="/admin" class="nav-link"><SVGAdmin /> Admin</RouterLink>
   </nav>
 </template>
 
