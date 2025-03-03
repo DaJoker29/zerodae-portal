@@ -14,9 +14,16 @@ export default {
       this.data.name = "";
       this.data.email = "";
     },
-    submitForm() {
-
-        // Send Form Data to API Here...
+    async submitForm() {
+      // Send Form Data to API Here...
+      const response = await fetch("/api/customers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.data),
+      });
+      console.log(response);
 
       this.resetForm();
     },
