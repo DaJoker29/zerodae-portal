@@ -1,4 +1,4 @@
-import customers from "./customers.js";
+import customers from "./customerRoutes.mjs";
 
 export default {
   customers,
