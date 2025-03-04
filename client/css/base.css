@@ -89,7 +89,12 @@ a {
   outline: none;
 }
 
-input {
+input,
+button,
+select,
+textarea {
+  padding: 0;
+  margin: 0;
   font-family: var(--font-primary);
   color: var(--purple-900);
 }
@@ -105,15 +110,23 @@ summary,
   cursor: pointer;
 }
 
-[type="text"] {
+label {
+  display: block;
+}
+
+label > input {
   display: block;
 }
 
 button,
+select,
+textarea,
 [type="text"],
+[type="tel"],
 [type="reset"],
 [type="submit"] {
   min-height: var(--gap-lg);
+  min-width: 20vw;
   padding: var(--gap-xs) var(--gap);
   margin: var(--gap-sm);
   border-radius: var(--gap-xs);

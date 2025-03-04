@@ -6,10 +6,12 @@ const stripe = new Stripe(
 
 const createCustomer = async function (req, res, next) {
   try {
-    const { name, email } = req.body;
+    const { name, email, phone, address } = req.body;
     const customer = await stripe.customers.create({
       name,
       email,
+      phone,
+      address,
     });
 
     console.log(customer);
