@@ -1,8 +1,8 @@
 <script>
-import SVGComputer from "./SVGComputer.vue";
-import SVGArrowList from "./SVGArrowList.vue";
-import SVGUserCircle from "./SVGUserCircle.vue";
-import SVGAdmin from "./SVGAdmin.vue";
+import SVGComputer from "./svg/SVGComputer.vue";
+import SVGArrowList from "./svg/SVGArrowList.vue";
+import SVGUserCircle from "./svg/SVGUserCircle.vue";
+import SVGAdmin from "./svg/SVGAdmin.vue";
 
 export default {
   components: {

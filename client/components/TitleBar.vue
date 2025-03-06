@@ -1,5 +1,5 @@
 <script>
-import SVGLogout from "./SVGLogout.vue";
+import SVGLogout from "./svg/SVGLogout.vue";
 
 export default {
   components: {

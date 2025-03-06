@@ -11,6 +11,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api", (req, res, next) => {
+  console.log(`${req.method} request on ${req.path}`);
+  next();
+});
+
 app.get("/api", (req, res) => {
   res.status(200).json({ message: "Hey!" });
 });

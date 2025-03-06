@@ -1,5 +1,5 @@
 <script>
-import SVGCopy from "./SVGCopy.vue";
+import SVGCopy from "./svg/SVGCopy.vue";
 import TitleBar from "./TitleBar.vue";
 import MainNav from "./MainNav.vue";
 import ProfileInfo from "./ProfileInfo.vue";

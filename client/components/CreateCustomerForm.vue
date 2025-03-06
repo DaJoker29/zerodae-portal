@@ -38,7 +38,6 @@ export default {
         },
         body: JSON.stringify(this.data),
       });
-      console.log(response);
 
       this.resetForm();
     },
@@ -139,6 +138,5 @@ export default {
         <input type="reset" value="Clear" @click.prevent="resetForm" />
       </fieldset>
     </form>
-    <pre>{{ data }}</pre>
   </section>
 </template>

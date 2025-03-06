@@ -1,7 +1,7 @@
 <!-- TODO: #1 Add alert when text is copied. -->
 
 <script>
-import SVGCopy from "./SVGCopy.vue";
+import SVGCopy from "./svg/SVGCopy.vue";
 
 export default {
   components: {
