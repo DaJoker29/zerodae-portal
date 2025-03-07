@@ -70,8 +70,8 @@ export default {
     </hgroup>
 
     <form id="create-customer-form">
+      <hr />
       <fieldset>
-        <hr />
         <label for="customer_name"
           >Customer Name
           <input
@@ -132,11 +132,22 @@ export default {
             v-model="data.address.postal_code"
           />
         </label>
-
-        <hr />
-        <input type="submit" value="Submit" @click.prevent="submitForm" />
-        <input type="reset" value="Clear" @click.prevent="resetForm" />
       </fieldset>
+      <hr />
+      <input type="submit" value="Submit" @click.prevent="submitForm" />
+      <input type="reset" value="Clear" @click.prevent="resetForm" />
     </form>
   </section>
 </template>
+
+<style scoped>
+fieldset {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--gap);
+}
+
+fieldset > * {
+  flex: 1 1 30ch;
+}
+</style>
