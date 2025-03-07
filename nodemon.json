@@ -1,4 +1,4 @@
 {
   "verbose": true,
-  "watch": ["server.js", "server"]
+  "watch": ["server.js", "server", ".env"]
 }
