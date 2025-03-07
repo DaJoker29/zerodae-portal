@@ -11,23 +11,6 @@ export default {
 </script>
 
 <template>
-  <CustomerList />
   <CreateCustomerForm />
+  <CustomerList />
 </template>
-
-<!-- 
-
-Create a Customer Parameters
-{
-    address: {},
-    description: "",
-    email: "",
-    metadata: {},
-    name: ""
-    payment_method: "",
-    phone: "",
-    shipping: {},
-    tax: {}
-}
-
--->

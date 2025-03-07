@@ -1,9 +1,12 @@
 <script>
+import { RouterLink } from "vue-router";
 import SVGChecklistNote from "./svg/SVGChecklistNote.vue";
+import SVGPlus from "./svg/SVGPlus.vue";
 
 export default {
   components: {
     SVGChecklistNote,
+    SVGPlus,
   },
   data() {
     return {
@@ -62,6 +65,15 @@ export default {
             >
               <SVGChecklistNote />
             </a>
+            <RouterLink
+              :to="{
+                path: '/add-subscription',
+                query: { customer: customer.id },
+              }"
+              title="Add New Subscription"
+            >
+              <SVGPlus />
+            </RouterLink>
           </td>
         </tr>
       </tbody>

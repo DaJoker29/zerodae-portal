@@ -21,6 +21,7 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/customers", routes.customers);
+app.use("/api/subscriptions", routes.subscriptions);
 
 // Error Handling Routes
 app.use((req, res, next) => {

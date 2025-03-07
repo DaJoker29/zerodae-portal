@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import DashboardView from "../views/DashboardView.vue";
 
 const defaultTitle = "ZeroDae User Portal";
 
@@ -22,6 +21,12 @@ const router = createRouter({
       path: "/admin",
       name: "Admin Panel",
       component: () => import("../views/AdminView.vue"),
+    },
+    {
+      path: "/add-subscription",
+      name: "Add a Subscription",
+      props: true,
+      component: () => import("../views/NewSubscriptionView.vue"),
     },
   ],
 });
