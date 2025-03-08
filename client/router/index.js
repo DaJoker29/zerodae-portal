@@ -10,22 +10,26 @@ const router = createRouter({
       path: "/",
       name: "Dashboard",
       component: () => import("../views/DashboardView.vue"),
+      meta: { requiresAuth: true },
     },
     {
       path: "/account",
       name: "Account Settings",
       component: () => import("../views/AccountView.vue"),
+      meta: { requiresAuth: true },
     },
     {
       path: "/admin",
       name: "Admin Panel",
       component: () => import("../views/AdminView.vue"),
+      meta: { requiresAuth: true, requiresAdmin: true },
     },
     {
       path: "/add-subscription",
       name: "Add a Subscription",
       props: true,
       component: () => import("../views/NewSubscriptionView.vue"),
+      meta: { requiresAuth: true },
     },
     {
       path: "/login",
@@ -35,26 +39,23 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
   const isAuthenticated = store.getters["auth/isAuthenticated"];
 
-  if (!isAuthenticated && to.name !== "Login") {
-    next({ name: "Login" });
-  } else {
-    next();
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    return {
+      path: "login",
+      query: { redirect: to.fullPath },
+    };
   }
 });
 
 router.afterEach((to, from) => {
-  setTitle(to.name);
-});
-
-function setTitle(name) {
-  if (name) {
-    document.title = `${name} — ${store.state.app.name}`;
+  if (to.name) {
+    document.title = `${to.name} — ${store.state.app.name}`;
   } else {
     document.title = store.state.app.name;
   }
-}
+});
 
 export default router;

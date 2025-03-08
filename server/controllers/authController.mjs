@@ -1,6 +1,39 @@
 import transporter from "../services/smtp.mjs";
 import jwt from "jsonwebtoken";
 
+const authenticateToken = (req, res, next) => {
+  const { token } = req.query;
+  if (!token) {
+    res.status(403);
+    return res.send("Can't verify user.");
+  }
+
+  let decoded;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+  } catch (err) {
+    res.status(403);
+    return res.send("Invalid auth credentials");
+  }
+
+  if (
+    !decoded.hasOwnProperty("email") ||
+    !decoded.hasOwnProperty("expirationDate")
+  ) {
+    res.status(403);
+    return res.send("Invalid auth credentials");
+  }
+
+  const { expirationDate } = decoded;
+  if (expirationDate < new Date()) {
+    res.status(403);
+    return res.send("Token has expired");
+  }
+
+  res.status(200);
+  return res.send("User has been validated");
+};
+
 const magicLinkTemplate = ({ link }) => `
 <h2>Hey there!</h2>
 <p>Here's the login link you requested:</p>
@@ -17,7 +50,7 @@ const sendMagicLink = (req, res, next) => {
     const mailOptions = {
       from: "Zero Daedalus",
       html: magicLinkTemplate({
-        link: `http://localhost:5173/account?token=${token}`,
+        link: `http://localhost:5173/login?token=${token}`,
       }),
       subject: "ZeroDae Client Connect Login",
       to: email,
@@ -44,4 +77,5 @@ function makeToken(email) {
 
 export default {
   sendMagicLink,
+  authenticateToken,
 };

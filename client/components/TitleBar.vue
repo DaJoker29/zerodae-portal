@@ -1,4 +1,5 @@
 <script>
+import { mapMutations } from "vuex/dist/vuex.cjs.js";
 import SVGLogout from "./svg/SVGLogout.vue";
 
 export default {
@@ -13,6 +14,11 @@ export default {
       return this.$route.name;
     },
   },
+  methods: {
+    ...mapMutations({
+      logout: "auth/logout",
+    }),
+  },
 };
 </script>
 
@@ -26,10 +32,10 @@ export default {
     </div>
     <div class="titlebar__end">
       <span class="titlebar__greeting">{{ greeting }} </span>
-      <router-link class="titlebar__logout" to="/logout"
+      <a class="titlebar__logout" @click="logout"
         ><SVGLogout class="titlebar__logout--icon" />
         <span class="titlebar__logout--text">LOGOUT</span>
-      </router-link>
+      </a>
     </div>
   </div>
 </template>

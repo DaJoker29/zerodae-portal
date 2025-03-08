@@ -8,13 +8,15 @@ export default {
     Header,
   },
   computed: {
-    ...mapGetters(["auth/isAuthenticated"]),
+    ...mapGetters({
+      isAuthenticated: "auth/isAuthenticated",
+    }),
   },
 };
 </script>
 
 <template>
-  <Header v-if="isAuthenticated" />
+  <Header v-if="isAuthenticated" :key="isAuthenticated" />
   <main class="page-content">
     <RouterView />
   </main>
