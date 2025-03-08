@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-
-const defaultTitle = "ZeroDae User Portal";
+import store from "../store/index.js";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -28,16 +27,34 @@ const router = createRouter({
       props: true,
       component: () => import("../views/NewSubscriptionView.vue"),
     },
+    {
+      path: "/login",
+      name: "Login",
+      component: () => import("../views/LoginView.vue"),
+    },
   ],
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name) {
-    document.title = `${to.name} — ${defaultTitle}`;
+  const isAuthenticated = store.getters["auth/isAuthenticated"];
+
+  if (!isAuthenticated && to.name !== "Login") {
+    next({ name: "Login" });
   } else {
-    document.title = defaultTitle;
+    next();
   }
-  next();
 });
+
+router.afterEach((to, from) => {
+  setTitle(to.name);
+});
+
+function setTitle(name) {
+  if (name) {
+    document.title = `${name} — ${store.state.app.name}`;
+  } else {
+    document.title = store.state.app.name;
+  }
+}
 
 export default router;

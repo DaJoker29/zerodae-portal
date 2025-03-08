@@ -1,4 +1,5 @@
 <script>
+import { mapGetters } from "vuex/dist/vuex.cjs.js";
 import Header from "./components/Header.vue";
 import { RouterView } from "vue-router";
 
@@ -6,11 +7,14 @@ export default {
   components: {
     Header,
   },
+  computed: {
+    ...mapGetters(["auth/isAuthenticated"]),
+  },
 };
 </script>
 
 <template>
-  <Header />
+  <Header v-if="isAuthenticated" />
   <main class="page-content">
     <RouterView />
   </main>

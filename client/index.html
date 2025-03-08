@@ -20,6 +20,9 @@
     import "./css/vars.css";
     import "./css/base.css";
 
-    createApp(App).use(router).use(store).mount("#app");
+    const app = createApp(App);
+    app.use(router);
+    app.use(store);
+    app.mount("#app");
   </script>
 </html>

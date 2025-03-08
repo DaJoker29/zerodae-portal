@@ -21,6 +21,7 @@ app.get("/api/test", (req, res) => {
 
 app.use("/api/customers", routes.customers);
 app.use("/api/subscriptions", routes.subscriptions);
+app.use("/api/auth", routes.auth);
 
 // Error Handling Routes
 app.use((req, res, next) => {
