@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import routes from "./server/routes/index.mjs";
 import logger from "./server/middleware/logger.mjs";
+import { notFound, errorHandler } from "./server/middleware/error.mjs";
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
@@ -23,18 +24,22 @@ app.use("/api/customers", routes.customers);
 app.use("/api/subscriptions", routes.subscriptions);
 app.use("/api/auth", routes.auth);
 
-// Error Handling Routes
-app.use((req, res, next) => {
-  res.status(404).send("Can't find that!");
-});
+// Error Handling
+app.use(notFound);
+app.use(errorHandler);
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Misadventure has occurred!");
-});
+const start = () => {
+  try {
+    app.listen(PORT, startupLog);
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+};
 
-// Start up Server
-app.listen(PORT, () => {
+start();
+
+function startupLog() {
   console.log("\n\nStarting ZeroDae Portal Server...");
   console.group("====================\n");
   console.log("NODE_ENV:", process.env.NODE_ENV);
@@ -45,4 +50,4 @@ app.listen(PORT, () => {
   console.group();
   console.log("\nLISTENING...\n");
   console.groupEnd();
-});
+}
