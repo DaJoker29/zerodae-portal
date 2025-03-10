@@ -1,9 +1,10 @@
 import express from "express";
-import authController from "../controllers/authController.mjs";
+import { generate, login, logout } from "../controllers/authController.mjs";
 
 const router = express.Router();
 
-router.post("/", authController.sendMagicLink);
-router.get("/token", authController.authenticateToken);
+router.post("/generate", generate);
+router.post("/login", login);
+router.post("/logout", logout);
 
 export default router;

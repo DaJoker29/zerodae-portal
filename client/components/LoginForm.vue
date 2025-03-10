@@ -1,17 +1,39 @@
 <script>
+import { formatPhone } from "../utils/helpers";
+
 export default {
   data() {
     return {
-      emailOrPhone: "",
+      input: "",
       tokenSent: false,
       error: false,
+      error_msg: "",
       response: {},
     };
   },
+  async mounted() {
+    const { token } = this.$route.query;
+    if (token) {
+      const { status } = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      });
+
+      if (status === 200) {
+        this.$store.commit("auth/login");
+        this.$router.push({ path: "/" });
+      } else if (status === 403) {
+        console.error();
+      }
+    }
+  },
   methods: {
     async onSubmit() {
-      const input = this.emailOrPhone;
-      const sanitized = input.replace(/\D/g, "").replace(/^1/g, "");
+      const email = this.input;
+      const phone = formatPhone(this.input);
       const options = {
         method: "POST",
         headers: {
@@ -19,28 +41,27 @@ export default {
         },
       };
 
-      if (input.indexOf("@") > -1) {
-        options.body = JSON.stringify({ email: input });
-        await fetch("/api/auth", options)
-          .then(({ status }) => {
-            if (status === 200) {
-              this.tokenSent = true;
-              this.response.heading = "Email Sent";
-              this.response.message =
-                "A login email is being sent. Click the link inside to log in.";
-            } else {
-              console.log(status);
-            }
-          })
-          .catch((err) => this.displayError(err));
-      } else if (sanitized.length === 10) {
-        options.body = JSON.stringify({ phone: sanitized });
+      if (email.indexOf("@") > -1) {
+        options.body = JSON.stringify({ email });
+      } else if (phone.length === 10) {
+        options.body = JSON.stringify({ phone });
+      } else {
+        throw new Error(`Input not properly formatted`);
       }
-    },
-    displayError(err) {
-      this.error = true;
-      this.response.heading = "Something went wrong";
-      this.response.message = err.message;
+
+      try {
+        const response = await fetch("/api/auth/generate", options);
+
+        if (response.ok) {
+          this.tokenSent = true;
+        } else {
+          throw new Error(`Response status: ${response.status}`);
+        }
+      } catch (err) {
+        console.error(err);
+        this.error = true;
+        this.error_msg = err;
+      }
     },
   },
 };
@@ -62,7 +83,7 @@ export default {
         pattern="([a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$|\+*[0-9]{0,2} *\(*[0-9]{3}[\) ]*[0-9]{3}-*[0-9]{4})"
         oninvalid="this.setCustomValidity('Must be a valid email address or 10-digit phone number')"
         oninput="this.setCustomValidity('')"
-        v-model="emailOrPhone"
+        v-model="input"
       />
       <input type="submit" value="Sign In" />
     </fieldset>
@@ -78,9 +99,16 @@ export default {
     </footer>
     <small>&copy; 2025 Zero Daedalus, LLC. All Rights Reserved.</small>
   </form>
+
+  <hgroup v-else-if="error">
+    <h3>Bruh?!</h3>
+    <p>{{ error_msg || "Something went wrong." }}</p>
+    <p><a href="" @click="location.reload()">Start over</a></p>
+  </hgroup>
+
   <hgroup v-else>
-    <h3>{{ response.heading }}</h3>
-    <p>{{ response.message }}</p>
+    <h3>Email Sent</h3>
+    <p>A login email is being sent. Click the link inside to log in.</p>
   </hgroup>
 </template>
 

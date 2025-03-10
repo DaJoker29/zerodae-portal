@@ -1,8 +1,6 @@
 import Stripe from "stripe";
 
-const stripe = new Stripe(
-  process.env.STRIPE_SECRET_KEY || "api_key_placeholder"
-);
+const stripe = new Stripe(process.env.STRIPE_SECRET || "api_key_placeholder");
 
 const createCustomer = async function (req, res, next) {
   try {

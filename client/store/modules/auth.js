@@ -1,23 +1,25 @@
 const state = {
-  token: localStorage.getItem("token"),
+  isLoggedIn: false,
 };
 
 const getters = {
-  isAuthenticated: () => !!state.token,
+  isAuthenticated(state) {
+    return state.isLoggedIn;
+  },
 };
 
 const mutations = {
-  authenticate(state, token) {
-    localStorage.setItem("token", token);
+  login(state) {
+    state.isLoggedIn = true;
   },
   logout(state) {
-    localStorage.removeItem("token");
+    state.isLoggedIn = false;
   },
 };
 
 export default {
   namespaced: true,
-  state,
   getters,
+  state,
   mutations,
 };
