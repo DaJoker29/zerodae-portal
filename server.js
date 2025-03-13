@@ -8,6 +8,8 @@ import MongoStore from "connect-mongo";
 import routes from "./server/routes/index.mjs";
 import logger from "./server/middleware/logger.mjs";
 import { notFound, errorHandler } from "./server/middleware/error.mjs";
+import { initAdmin } from "./server/services/admin.mjs";
+import { initDB } from "./server/services/db.mjs";
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
@@ -15,7 +17,7 @@ const HOST = process.env.HOST || "localhost";
 const app = express();
 
 const mongoOptions = {
-  mongoUrl: process.env.DB_URL,
+  mongoUrl: process.env.MONGO_URI,
 };
 
 const sessionOptions = {
@@ -53,16 +55,8 @@ app.use(errorHandler);
 
 const start = async () => {
   try {
-    await mongoose.connect(process.env.DB_URL);
-    const db = mongoose.connection;
-
-    db.once("open", () =>
-      console.log(`Database connected: ${process.env.DB_URL}`)
-    );
-
-    db.on("error", (err) => {
-      console.error(`Database error: ${err}`);
-    });
+    await initDB();
+    await initAdmin();
 
     app.listen(PORT, startupLog);
   } catch (err) {
@@ -74,7 +68,11 @@ const start = async () => {
 start();
 
 function startupLog() {
-  console.log(
-    `\n\nStarting ZeroDae Client Connect...\n====================\n\n\tNODE_ENV: ${process.env.NODE_ENV}\n\tHostname (Default: localhost): ${HOST}\n\tPort (Default: 3000): ${PORT}\n\tDatabase: ${process.env.DB_URL}\n\n\tLISTENING...\n\n====================`
-  );
+  console.group("\nStarting ZeroDae Client Connect...");
+  console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+  console.log(`Hostname (Default: localhost): ${HOST}`);
+  console.log(`Port (Default: 3000): ${PORT}`);
+  console.log(`Database: ${process.env.MONGO_URI}`);
+  console.log("\nLISTENING...\n");
+  console.groupEnd();
 }
