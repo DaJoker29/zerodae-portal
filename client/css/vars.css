@@ -1,0 +1,64 @@
+:root {
+  /* COLORS */
+
+  --white: hsl(0, 0%, 95%);
+  --grey-100: hsl(0, 0%, 85%);
+  --grey-300: hsl(0, 0%, 65%);
+  --grey-500: hsl(0, 0%, 50%);
+  --grey-700: hsl(0, 0%, 35%);
+  --grey-900: hsl(0, 0%, 15%);
+  --black: hsl(0, 0%, 5%);
+
+  --purple-100: hsl(323, 73%, 95%);
+  --purple-300: hsl(323, 73%, 80%);
+  --purple-500: hsl(323, 73%, 65%);
+  --purple-700: hsl(323, 73%, 40%);
+  --purple-900: hsl(323, 73%, 15%);
+
+  --bluegreen-100: hsl(173, 58%, 95%);
+  --bluegreen-300: hsl(173, 58%, 80%);
+  --bluegreen-500: hsl(173, 58%, 65%);
+  --bluegreen-700: hsl(173, 58%, 40%);
+  --bluegreen-900: hsl(173, 58%, 15%);
+
+  --orange-100: hsl(12, 76%, 95%);
+  --orange-300: hsl(12, 76%, 80%);
+  --orange-500: hsl(12, 76%, 65%);
+  --orange-700: hsl(12, 76%, 40%);
+  --orange-900: hsl(12, 76%, 25%);
+
+  /* TYPOGRAPHY */
+  --font-primary: "Oswald", system-ui, sans-serif;
+  --font-base-size: 16px;
+  --font-scale-ratio: 1.25;
+  --font-line-height: 1.4;
+
+  --text-sm: clamp(0.875rem, 1rem / var(--font-scale-ratio), 1rem);
+  --text-md: clamp(1rem, 1rem * var(--font-scale-ratio), 1.25rem);
+  --text-lg: clamp(
+    1.25rem,
+    1rem * var(--font-scale-ratio) * var(--font-scale-ratio),
+    1.5rem
+  );
+  --text-xl: clamp(
+    1.5rem,
+    1rem * var(--font-scale-ratio) * var(--font-scale-ratio) *
+      var(--font-scale-ratio),
+    2rem
+  );
+  --text-xxl: clamp(
+    2rem,
+    1rem * var(--font-scale-ratio) * var(--font-scale-ratio) *
+      var(--font-scale-ratio) * var(--font-scale-ratio),
+    3rem
+  );
+
+  /* SPACING */
+  --gap-xs: 0.25rem;
+  --gap-sm: 0.5rem;
+  --gap: 1rem;
+  --gap-lg: 2rem;
+  --gap-xl: 3rem;
+  --gap-xxl: 4rem;
+  --container-width: clamp(30rem, 85ch, 90vw);
+}
