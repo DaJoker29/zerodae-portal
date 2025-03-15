@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema(
     is_admin: { type: Boolean },
     refreshToken: {
       type: String,
+      select: false,
     },
   },
   schemaOptions

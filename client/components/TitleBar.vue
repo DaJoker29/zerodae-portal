@@ -1,5 +1,5 @@
 <script>
-import { mapMutations } from "vuex/dist/vuex.cjs.js";
+import { mapGetters, mapMutations } from "vuex/dist/vuex.cjs.js";
 import SVGLogout from "./svg/SVGLogout.vue";
 
 export default {
@@ -7,8 +7,9 @@ export default {
     SVGLogout,
   },
   computed: {
+    ...mapGetters(["firstName"]),
     greeting() {
-      return `Welcome back, ${this.$store.state.user.first_name}`;
+      return `Welcome back, ${this.firstName}`;
     },
     routeName() {
       return this.$route.name;

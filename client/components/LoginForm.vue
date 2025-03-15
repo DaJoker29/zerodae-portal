@@ -14,20 +14,7 @@ export default {
   async mounted() {
     const { token } = this.$route.query;
     if (token) {
-      const { status } = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token }),
-      });
-
-      if (status === 200) {
-        this.$store.commit("auth/login");
-        this.$router.push({ path: "/" });
-      } else if (status === 403) {
-        console.error();
-      }
+      this.$store.dispatch("auth/login", token);
     }
   },
   methods: {

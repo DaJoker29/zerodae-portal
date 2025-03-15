@@ -7,6 +7,9 @@ export default {
   components: {
     Header,
   },
+  mounted() {
+    this.$store.dispatch("auth/fetchUser");
+  },
   computed: {
     ...mapGetters({
       isAuthenticated: "auth/isAuthenticated",

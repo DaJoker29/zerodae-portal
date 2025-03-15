@@ -1,6 +1,10 @@
 import { User } from "../models/index.mjs";
 import transporter from "../services/smtp.mjs";
-import jwt from "jsonwebtoken";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+  decodeJWT,
+} from "../utils/jwt.mjs";
 
 const generate = async (req, res, next) => {
   try {
@@ -10,7 +14,7 @@ const generate = async (req, res, next) => {
       const user = await User.findOne({ $or: [{ phone }, { email }] });
 
       if (user) {
-        const accessToken = generateAccessToken(user.id);
+        const accessToken = generateAccessToken({ id: user.id });
 
         const mailOptions = {
           from: process.env.EMAIL_FROM,
@@ -24,7 +28,7 @@ const generate = async (req, res, next) => {
             return next(err);
           }
 
-          console.log(`token sent: ${user.email}`);
+          console.log(`Token generated: ${user.email}`);
           res.sendStatus(200);
         });
       } else {
@@ -45,21 +49,14 @@ const login = async (req, res, next) => {
     return res.send("Can't verify user.");
   }
 
-  let decoded, user;
+  const decoded = decodeJWT(accessToken);
 
-  try {
-    decoded = jwt.verify(accessToken, process.env.JWT_SECRET);
-  } catch (err) {
+  if (!decoded || !decoded.id) {
     res.status(403);
     return res.send("Invalid auth credentials");
   }
 
-  if (!decoded.id) {
-    res.status(403);
-    return res.send("Invalid auth credentials");
-  }
-
-  user = await User.findOne({ _id: decoded.id });
+  const user = await User.findOne({ _id: decoded.id });
 
   if (!user) {
     res.status(404);
@@ -67,10 +64,11 @@ const login = async (req, res, next) => {
   }
 
   // Successfully logged in
-  const refreshToken = generateRefreshToken(user.id);
+  const refreshToken = generateRefreshToken({ id: user.id });
   user.refreshToken = refreshToken;
   await user.save();
-  console.log(`Authenticated: ${user.id}`);
+
+  console.log(`Authenticated: ${user.email}`);
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
@@ -88,26 +86,36 @@ const login = async (req, res, next) => {
   return res.send("User has been validated");
 };
 
-const htmlTemplate = (accessToken) => `
-<h2>Hey there!</h2>
-<p>Here's the login link you requested:</p>
-<p><a href="http://localhost:5173/login?token=${accessToken}">Click here</a></p>
-`;
-
 const logout = (req, res, next) => {
   res.send("Logout");
 };
 
-export { generate, login, logout };
+const refreshToken = (req, res, next) => {
+  const { refreshToken } = req.cookies;
+  console.log("Refresh endpoint hit");
 
-function generateAccessToken(id) {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
-}
+  if (refreshToken) {
+  }
+  res.status(401);
+  res.send("Token expired.");
+};
 
-function generateRefreshToken(id) {
-  return jwt.sign({ id }, process.env.JWT_REFRESH_SECRET, {
-    expiresIn: "24h",
-  });
+const whoami = async (req, res, next) => {
+  const { user } = req;
+  if (user) {
+    return res.json(user);
+  } else {
+    res.status(404);
+    return res.send("No user found");
+  }
+};
+
+export { generate, login, logout, refreshToken, whoami };
+
+function htmlTemplate(accessToken) {
+  return `
+<h2>Hey there!</h2>
+<p>Here's the login link you requested:</p>
+<p><a href="http://localhost:5173/login?token=${accessToken}">Click here</a></p>
+`;
 }
