@@ -4,6 +4,7 @@ import crypto from "crypto";
 const schemaOptions = {
   toJSON: { getters: true, virtuals: true },
   toObject: { getters: true, virtuals: true },
+  timestamps: true,
 };
 
 const userSchema = new mongoose.Schema(
