@@ -9,13 +9,9 @@ const schemaOptions = {
 
 const userSchema = new mongoose.Schema(
   {
-    first_name: {
-      type: String,
-      required: true,
-    },
-    last_name: {
-      type: String,
-      required: true,
+    name: {
+      first: { type: String, required: true },
+      last: { type: String, required: true },
     },
     email: {
       type: String,
@@ -24,7 +20,7 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
     },
-    referral_code: {
+    referralCode: {
       type: String,
       unique: true,
       default: () => crypto.randomBytes(8).toString("hex"),
@@ -32,7 +28,7 @@ const userSchema = new mongoose.Schema(
     stripe_id: {
       type: String,
     },
-    is_admin: { type: Boolean },
+    isAdmin: { type: Boolean },
     refreshToken: {
       type: String,
       select: false,
@@ -41,8 +37,8 @@ const userSchema = new mongoose.Schema(
   schemaOptions
 );
 
-userSchema.virtual("full_name").get(function () {
-  return `${this.first_name} ${this.last_name}`;
+userSchema.virtual("name.full").get(function () {
+  return `${this.name.first} ${this.name.last}`;
 });
 
 const User = mongoose.model("User", userSchema);

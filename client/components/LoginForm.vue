@@ -1,5 +1,9 @@
 <script>
-import { formatPhone } from "../utils/helpers";
+import { mapStores } from "pinia";
+import { validateInput } from "../utils/helpers";
+import { useAuthStore } from "../stores/authStore";
+import { useUserStore } from "../stores/userStore";
+import router from "../router";
 
 export default {
   data() {
@@ -14,40 +18,50 @@ export default {
   async mounted() {
     const { token } = this.$route.query;
     if (token) {
-      this.$store.dispatch("auth/login", token);
+      const isLoggedIn = await this.authStore.login(token);
+
+      if (isLoggedIn) {
+        await this.userStore.fetchUser();
+        const route = this.userStore.isAdmin ? "/admin" : "/";
+        this.$router.push(route);
+      }
     }
+  },
+  computed: {
+    ...mapStores(useAuthStore, useUserStore),
   },
   methods: {
     async onSubmit() {
-      const email = this.input;
-      const phone = formatPhone(this.input);
+      const body = validateInput(this.input);
+
+      if (!body) {
+        this.error = true;
+        return (this.error_msg =
+          "Address or mobile number was properly formatted.");
+      }
+
       const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body,
       };
 
-      if (email.indexOf("@") > -1) {
-        options.body = JSON.stringify({ email });
-      } else if (phone.length === 10) {
-        options.body = JSON.stringify({ phone });
-      } else {
-        throw new Error(`Input not properly formatted`);
-      }
-
-      try {
-        const response = await fetch("/api/auth/generate", options);
-
-        if (response.ok) {
-          this.tokenSent = true;
-        } else {
-          throw new Error(`Response status: ${response.status}`);
+      const response = await fetch("/api/auth/generate", options).catch(
+        (err) => {
+          console.error(err);
+          this.error = true;
+          this.error_msg = err.status;
         }
-      } catch (err) {
-        console.error(err);
+      );
+
+      if (response.ok) {
+        this.tokenSent = true;
+      } else {
+        console.error(response.error);
         this.error = true;
-        this.error_msg = err;
+        this.error_msg = "Something went wrong";
       }
     },
   },
@@ -55,10 +69,10 @@ export default {
 </script>
 
 <template>
-  <form v-if="!tokenSent && !error" id="login-form" @submit.prevent="onSubmit">
+  <form v-if="!tokenSent" id="login-form" @submit.prevent="onSubmit">
     <hgroup>
-      <h3>Sign in</h3>
-      <p>to access ZeroDae's Client Connect</p>
+      <h3>{{ error ? "Error" : "Sign in" }}</h3>
+      <p>{{ error_msg || "to access ZeroDae's Client Connect" }}</p>
     </hgroup>
 
     <fieldset>
@@ -86,12 +100,6 @@ export default {
     </footer>
     <small>&copy; 2025 Zero Daedalus, LLC. All Rights Reserved.</small>
   </form>
-
-  <hgroup v-else-if="error">
-    <h3>Bruh?!</h3>
-    <p>{{ error_msg || "Something went wrong." }}</p>
-    <p><a href="" @click="location.reload()">Start over</a></p>
-  </hgroup>
 
   <hgroup v-else>
     <h3>Email Sent</h3>

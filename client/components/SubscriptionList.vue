@@ -10,11 +10,11 @@ export default {
 
 <template>
   <section>
-    <SubscriptionListItem
+    <!-- <SubscriptionListItem
       v-for="subscription in this.$store.state.subscriptions"
       :subscription="subscription"
       :key="subscription.id"
-    />
+    /> -->
   </section>
 </template>
 
