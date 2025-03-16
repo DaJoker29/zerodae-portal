@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import store from "../store/index.js";
+import { useAuthStore } from "../stores/authStore";
+import { useAppStore } from "../stores/appStore";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -39,10 +40,10 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from) => {
-  const isAuthenticated = store.getters["auth/isAuthenticated"];
+router.beforeEach(async (to, from) => {
+  const authStore = useAuthStore();
 
-  if (to.meta.requiresAuth && !isAuthenticated) {
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     return {
       path: "login",
       query: { redirect: to.fullPath },
@@ -51,10 +52,12 @@ router.beforeEach((to, from) => {
 });
 
 router.afterEach((to, from) => {
+  const appStore = useAppStore();
+
   if (to.name) {
-    document.title = `${to.name} — ${store.state.app.name}`;
+    document.title = `${to.name} — ${appStore.name}`;
   } else {
-    document.title = store.state.app.name;
+    document.title = appStore.name;
   }
 });
 

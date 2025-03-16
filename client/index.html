@@ -14,17 +14,19 @@
   </body>
   <script type="module">
     import { createApp } from "vue";
+    import { createPinia } from "pinia";
+    import piniaPluginPersistedState from "pinia-plugin-persistedstate";
     import App from "./App.vue";
     import router from "./router";
-    import store from "./store";
-    import axios from "./services/axios.mjs";
     import "./css/vars.css";
     import "./css/base.css";
 
     const app = createApp(App);
-    app.config.globalProperties.axios = axios;
+    const pinia = createPinia();
+    pinia.use(piniaPluginPersistedState);
+
     app.use(router);
-    app.use(store);
+    app.use(pinia);
     app.mount("#app");
   </script>
 </html>

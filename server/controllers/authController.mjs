@@ -15,12 +15,15 @@ const generate = async (req, res, next) => {
 
       if (user) {
         const accessToken = generateAccessToken({ id: user.id });
+        const refreshToken = generateRefreshToken({ id: user.id });
+        user.refreshToken = refreshToken;
+        await user.save();
 
         const mailOptions = {
           from: process.env.EMAIL_FROM,
           html: htmlTemplate(accessToken),
           subject: process.env.EMAIL_SUBJECT,
-          to: `${user.full_name} <${user.email}>`,
+          to: `${user.name.full} <${user.email}>`,
         };
 
         transporter.sendMail(mailOptions, (err, info) => {
@@ -62,11 +65,6 @@ const login = async (req, res, next) => {
     res.status(404);
     return res.send("User not found");
   }
-
-  // Successfully logged in
-  const refreshToken = generateRefreshToken({ id: user.id });
-  user.refreshToken = refreshToken;
-  await user.save();
 
   console.log(`Authenticated: ${user.email}`);
 
@@ -110,7 +108,19 @@ const whoami = async (req, res, next) => {
   }
 };
 
-export { generate, login, logout, refreshToken, whoami };
+const check = async (req, res, next) => {
+  const { user } = req;
+
+  if (user) {
+    res.status(200);
+    return res.send("User is valid");
+  }
+
+  res.status(401);
+  return res.send("Unauthorized");
+};
+
+export { generate, login, logout, refreshToken, whoami, check };
 
 function htmlTemplate(accessToken) {
   return `

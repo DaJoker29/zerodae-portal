@@ -1,19 +1,27 @@
 <script>
-import { mapGetters } from "vuex/dist/vuex.cjs.js";
 import Header from "./components/Header.vue";
 import { RouterView } from "vue-router";
+import { mapState, mapStores } from "pinia";
+import { useAuthStore } from "./stores/authStore";
+import { useUserStore } from "./stores/userStore";
 
 export default {
   components: {
     Header,
   },
-  mounted() {
-    this.$store.dispatch("auth/fetchUser");
+  async beforeMount() {
+    // TODO: Check if user is authenticated and, if so, update user.
+    const stillLoggedIn = await this.authStore.check();
+
+    if (stillLoggedIn) {
+      await this.userStore.fetchUser();
+    } else {
+      await this.userStore.$reset();
+    }
   },
   computed: {
-    ...mapGetters({
-      isAuthenticated: "auth/isAuthenticated",
-    }),
+    ...mapState(useAuthStore, ["isAuthenticated"]),
+    ...mapStores(useAuthStore, useUserStore),
   },
 };
 </script>

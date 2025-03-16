@@ -16,10 +16,12 @@ const initAdmin = async () => {
     }
 
     await User.create({
-      first_name: process.env.ADMIN_FIRST,
-      last_name: process.env.ADMIN_LAST,
+      name: {
+        first: process.env.ADMIN_FIRST,
+        last: process.env.ADMIN_LAST,
+      },
       email: process.env.ADMIN_EMAIL,
-      is_admin: true,
+      isAdmin: true,
     });
     console.log(
       "Creating new admin user...Check environment variables for details."
@@ -33,7 +35,7 @@ const initAdmin = async () => {
 async function purgeAdmin() {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    await User.deleteMany({ is_admin: true });
+    await User.deleteMany({ isAdmin: true });
   } catch (err) {
     console.error(err);
   }

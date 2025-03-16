@@ -1,13 +1,15 @@
 <script>
-import { mapGetters, mapMutations } from "vuex/dist/vuex.cjs.js";
+import { mapActions, mapState } from "pinia";
 import SVGLogout from "./svg/SVGLogout.vue";
+import { useUserStore } from "../stores/userStore";
+import { useAuthStore } from "../stores/authStore";
 
 export default {
   components: {
     SVGLogout,
   },
   computed: {
-    ...mapGetters(["firstName"]),
+    ...mapState(useUserStore, ["firstName"]),
     greeting() {
       return `Welcome back, ${this.firstName}`;
     },
@@ -16,9 +18,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({
-      logout: "auth/logout",
-    }),
+    ...mapActions(useAuthStore, ["logout"]),
   },
 };
 </script>
